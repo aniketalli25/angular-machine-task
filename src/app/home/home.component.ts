@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { v4 as uuidv4 } from 'uuid';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
@@ -33,9 +32,10 @@ export class HomeComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       addressType: ['home'],
-      interest: ['',],
+      interest: ['', Validators.required],
       interests: [''],
-
+      mobileNumber:['',Validators.required],
+      emailId:['',Validators.required],
       address1: ['', Validators.required],
       address2: ['', Validators.required],
       companyAddress1: [''],
@@ -44,6 +44,8 @@ export class HomeComponent implements OnInit {
       about: ['', Validators.required],
       profileImage: [null, Validators.required]
     });
+
+
 
     // Subscribe to changes in the addressType control
     this.profileForm.get('addressType')?.valueChanges.subscribe((value) => {
@@ -92,21 +94,50 @@ export class HomeComponent implements OnInit {
 
 
 
-  submitForm() {
-    if (this.profileForm.valid) {
-      const profileId = uuidv4();
-      this.profileForm.patchValue({
-        id: profileId,
-        interests: this.interests
+submitForm() {
+  if (this.profileForm.valid) {
+    this.profileForm.patchValue({
+      interests: this.interests
+    });
+
+    this.http.post('http://localhost:3000/profiles', this.profileForm.value).subscribe((res: any) => {
+      // Extract ID from the response
+      const id = res.id; // Assuming the response contains an 'id' field
+
+      alert('Data posted successfully');
+
+      // Navigate to a specific route with the ID
+      this.router.navigate(['./profile'] ,{
+        state: {
+          formData: this.profileForm.value,
+          interests: this.interests,
+          id
+           // Pass the ID to the next route
+        }
       });
-      this.http.post('http://localhost:3000/profiles', this.profileForm.value).subscribe(res => {
-        alert('Data posted successfully');
-        this.router.navigate(['./profile'], { state: { formData: this.profileForm.value, profileId: profileId,  interests: this.interests } });
-      });
-    } else {
-      alert('Please fill in all required fields.');
-    }
+    });
+  } else {
+    alert('Please fill in all required fields.');
   }
+}
+// submitForm() {
+//   if (this.profileForm.valid) {
+//     this.profileForm.patchValue({
+//       interests: this.interests
+//     });
+
+//     this.http.post('http://localhost:3000/profiles', this.profileForm.value).subscribe((res: any) => {
+//       const id = res.id;
+//       alert('Data posted successfully');
+
+//       // Navigate to profile page with the extracted ID
+//       this.router.navigate(['./profile', id]); // Make sure 'id' is passed here
+//     });
+//   } else {
+//     alert('Please fill in all required fields.');
+//   }
+// }
+
 
   handleFileInput(event: any) {
     const fileInput = event.target as HTMLInputElement;

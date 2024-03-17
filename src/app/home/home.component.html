@@ -233,6 +233,25 @@
         </div>
           </div>
         </div>
+
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <input type="text" class="form-control mx-2" placeholder="Mobile number" formControlName="mobileNumber" pattern="[0-9]{10}">
+              <div class="p-0 m-0" *ngIf="profileForm.get('mobileNumber')?.errors && (profileForm.get('mobileNumber')?.dirty || profileForm.get('mobileNumber')?.touched)">
+                <div *ngIf="profileForm.get('mobileNumber')?.errors?.['required']" class="text-danger">&nbsp; Mobile number is required.</div>
+                <div *ngIf="profileForm.get('mobileNumber')?.errors?.['pattern']" class="text-danger">&nbsp; Please enter a valid mobile number.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Email address" formControlName="emailId" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+              <div class="p-0 m-0" *ngIf="profileForm.get('emailId')?.errors && (profileForm.get('emailId')?.dirty || profileForm.get('emailId')?.touched)">
+                <div *ngIf="profileForm.get('emailId')?.errors?.['required']" class="text-danger">&nbsp; Email address is required.</div>
+                <div *ngIf="profileForm.get('emailId')?.errors?.['pattern']" class="text-danger">&nbsp; Please enter a valid email address.</div>
+              </div>
+            </div>
+          </div>
+
+
           <div class="row">
             <div class="col-md-6">
               <select class="form-select form-control mx-2" id="addressType" formControlName="addressType">
@@ -243,10 +262,11 @@
 
             </div>
             <div class="col-md-6">
-              <textarea class="form-control" rows="1" id="interestField" placeholder="Enter your interests" (keydown.enter)="addInterest()" #interestInput></textarea>
-              <div *ngIf="profileForm.get('interest')?.errors && (profileForm.get('interest')?.dirty || profileForm.get('interest')?.touched)">
+              <textarea class="form-control" rows="1" id="interestField" placeholder="Enter your interests" formControlName="interest" (keydown.enter)="addInterest()" #interestInput></textarea>
+              <div class="p-0 m-0" *ngIf="profileForm.get('interest')?.errors && (profileForm.get('interest')?.dirty || profileForm.get('interest')?.touched)">
                 <div *ngIf="profileForm.get('interest')?.errors?.['required']" class="text-danger">&nbsp; Interest is required.</div>
                 <div *ngIf="profileForm.get('interest')?.errors?.['invalidFormat']" class="text-danger">&nbsp; Invalid format. Please separate interests by commas.</div>
+                <!-- Add any other validation messages if necessary -->
               </div>
               <div *ngIf="interests.length > 0" class="mt-2 d-flex">
                 <h5>Interests:</h5>
@@ -258,6 +278,7 @@
                 </div>
               </div>
             </div>
+
 
 
 

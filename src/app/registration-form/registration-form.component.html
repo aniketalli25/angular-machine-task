@@ -68,3 +68,92 @@
     </div>
   </div>
 </form> -->
+
+<!-- / -->
+<!-- <div class="row">
+  <div class="col-md-3">
+    <div class="row mx-2">
+      <input type="file" id="file" class="file-input" (change)="handleFileInput($event)">
+      <div class="file-container">
+        <label for="file" class="file-label">
+          <div class="upload-text w-100" *ngIf="profileForm.get('profileImage')?.value; else defaultText">
+            Uploaded
+          </div>
+          <ng-template #defaultText>
+            <div class="upload-text w-100">Upload Image</div>
+          </ng-template>
+          <input type="file" id="file" class="file-input" (change)="handleFileInput($event)">
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="d-flex justify-content-between">
+      <input type="text" class="form-control mx-2" placeholder="First Name" formControlName="firstName">
+      <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+    </div>
+    <div *ngIf="profileForm.get('firstName')?.errors && (profileForm.get('firstName')?.dirty || profileForm.get('firstName')?.touched)">
+      <div *ngIf="profileForm.get('firstName')?.errors?.['required']" class="text-danger">&nbsp; First name is required.</div>
+      <div *ngIf="profileForm.get('firstName')?.errors?.['pattern']" class="text-danger">First name must contain
+        only alphabetic characters and should not exceed 20 characters.</div>
+    </div>
+    <div class="mt-2 d-flex justify-content-between">
+      <input type="text" class="form-control mx-2" placeholder="Email address" formControlName="emailId" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+      <div class="p-0 m-0" *ngIf="profileForm.get('emailId')?.errors && (profileForm.get('emailId')?.dirty || profileForm.get('emailId')?.touched)">
+        <div *ngIf="profileForm.get('emailId')?.errors?.['required']" class="text-danger">&nbsp; Email address is required.</div>
+        <div *ngIf="profileForm.get('emailId')?.errors?.['pattern']" class="text-danger">&nbsp; Please enter a valid email address.</div>
+      </div>
+
+        <textarea class="form-control " rows="1" id="interestField" placeholder="Enter your interests" (keydown.enter)="addInterest()" #interestInput></textarea>
+        <div *ngIf="profileForm.get('interest')?.errors && (profileForm.get('interest')?.dirty || profileForm.get('interest')?.touched)">
+          <div *ngIf="profileForm.get('interest')?.errors?.['required']" class="text-danger">&nbsp; Interest is required.</div>
+          <div *ngIf="profileForm.get('interest')?.errors?.['invalidFormat']" class="text-danger">&nbsp; Invalid format. Please separate interests by commas.</div>
+        </div>
+        <div *ngIf="interests.length > 0" class="mt-2 d-flex">
+          <h5>Interests:</h5>
+          <div class="d-flex flex-wrap">
+            <small class="intrest-chip mx-1 px-2 pt-1" *ngFor="let interest of interests; let i = index">
+              {{ interest }}
+              <i class="fas fa-times p-2" style="color: red;" (click)="removeInterest(i)"></i>
+            </small>
+          </div>
+        </div>
+
+    </div>
+
+      <div class=" mt-2 d-flex justify-content-between">
+        <input type="text" class="form-control mx-2" placeholder="Mobile number" formControlName="mobileNumber" pattern="[0-9]{10}">
+        <div class="p-0 m-0" *ngIf="profileForm.get('mobileNumber')?.errors && (profileForm.get('mobileNumber')?.dirty || profileForm.get('mobileNumber')?.touched)">
+          <div *ngIf="profileForm.get('mobileNumber')?.errors?.['required']" class="text-danger">&nbsp; Mobile number is required.</div>
+          <div *ngIf="profileForm.get('mobileNumber')?.errors?.['pattern']" class="text-danger">&nbsp; Please enter a valid mobile number.</div>
+        </div>
+        <select class="form-select form-control" id="addressType" formControlName="addressType">
+          <option value="home">Home</option>
+          <option value="company">Company</option>
+        </select>
+
+
+      </div>
+
+
+
+    <div class="mt-2">
+      <div class="d-flex justify-content-between" *ngIf="profileForm.get('addressType')?.value === 'home'">
+        <input type="text" class="form-control mx-2" placeholder="Address 1" formControlName="address1">
+        <input type="text" class="form-control" placeholder="Address 2" formControlName="address2">
+      </div>
+      <div class="d-flex justify-content-between" *ngIf="profileForm.get('addressType')?.value === 'company'">
+        <input type="text" class="form-control mx-2" placeholder="Company Address 1" formControlName="companyAddress1">
+        <input type="text" class="form-control" placeholder="Company Address 2" formControlName="companyAddress2">
+      </div>
+    </div>
+    <div>
+      <label for="ageSlide" class="mx-2">Age:</label>
+      <input type="range" class="form-range mx-2" id="ageSlider" min="1" max="100" formControlName="age">
+      <span>{{ profileForm.get('age')?.value }}</span>
+    </div>
+    <div class=" col-md-10 d-flex justify-content-center">
+      <button type="submit" class=" btn px-5"  style="background: rgba(var(--accent-color-rgb), 0.85); color: white;">Update</button>
+    </div>
+  </div>
+</div> -->
